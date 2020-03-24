@@ -1,1 +1,3 @@
-rootProject.name = 'noname'
+rootProject.name = 'english-portal'
+
+include ':authentication'
