@@ -36,6 +36,10 @@ dependencies {
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.1'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.1'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.1'
+
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 }

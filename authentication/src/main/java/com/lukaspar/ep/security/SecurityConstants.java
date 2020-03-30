@@ -1,0 +1,17 @@
+package com.lukaspar.ep.security;
+
+public class SecurityConstants {
+
+    public static final String AUTH_LOGIN_URL = "/users/login";
+    public static final String AUTH_LOGIN_METHOD = "POST";
+
+    public static final String TOKEN_TYPE = "JWT";
+    public static final String TOKEN_ISSUER = "english-portal";
+    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final int TOKEN_EXPIRATION_TIME_MILLISECONDS = 1800000;
+
+    private SecurityConstants() {
+        throw new IllegalStateException("Cannot create instance of static util class");
+    }
+}

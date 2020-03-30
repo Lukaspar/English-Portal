@@ -3,6 +3,7 @@ package com.lukaspar.ep.controller;
 import com.lukaspar.ep.dto.ApiError;
 import com.lukaspar.ep.exception.RoleNotFoundException;
 import com.lukaspar.ep.exception.UserAlreadyExistsException;
+import com.lukaspar.ep.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ public class RestExceptionHandler {
         return handle(HttpStatus.CONFLICT, ex);
     }
 
-    @ExceptionHandler(RoleNotFoundException.class)
+    @ExceptionHandler({ RoleNotFoundException.class, UserNotFoundException.class })
     protected ResponseEntity<ApiError> handleRoleNotFoundException(Exception ex, WebRequest request){
         return handle(HttpStatus.NOT_FOUND, ex);
     }
