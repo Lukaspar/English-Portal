@@ -1,5 +1,6 @@
 package com.lukaspar.ep.config;
 
+import com.lukaspar.ep.security.JwtAuthenticationEntryPoint;
 import com.lukaspar.ep.security.JwtAuthenticationFilter;
 import com.lukaspar.ep.security.JwtAuthorizationFilter;
 import com.lukaspar.ep.service.CustomUserService;
@@ -26,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final CustomUserService userService;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Value("${jwt-secret}")
     private String secretKey;
@@ -45,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new JwtAuthorizationFilter(secretKey), JwtAuthenticationFilter.class)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey))
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
