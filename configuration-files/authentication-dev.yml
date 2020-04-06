@@ -1,0 +1,23 @@
+server:
+  port: 8010
+
+spring:
+  profiles: dev
+  application:
+    name: authentication
+  liquibase:
+    change-log: classpath:db/changelog/dbchangelog.xml
+    enabled: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+jwt-secret: 2r5u8x/A?D(G+KbPdSgVkYp3s6v9y$B&E)H@McQfThWmZq4t7w!z%C*F-JaNdRgU
