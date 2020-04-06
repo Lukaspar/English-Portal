@@ -1,0 +1,27 @@
+#######
+# LOCAL
+#######
+
+spring:
+  profiles:
+    - local
+  application:
+    name: authentication
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+---
+
+#######
+# DEV
+#######
+
+spring:
+  profiles:
+    - dev
+  application:
+    name: authentication
+  cloud:
+    config:
+      uri: http://localhost:8888

@@ -1,3 +1,4 @@
 rootProject.name = 'english-portal'
 
-include ':authentication'
+include ':authentication',
+        ':configuration'

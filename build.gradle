@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     compile project(":authentication")
+    compile project(":configuration")
 }
 
 test {
