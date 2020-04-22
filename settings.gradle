@@ -1,4 +1,5 @@
 rootProject.name = 'english-portal'
 
 include ':authentication',
-        ':configuration'
+        ':configuration',
+        'discovery'
