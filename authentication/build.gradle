@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.lukaspar.ep'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -24,6 +24,8 @@ ext {
 }
 
 dependencies {
+	compile project(':common')
+
 	compileOnly 'org.projectlombok:lombok'
 	runtime('org.postgresql:postgresql')
 	annotationProcessor 'org.projectlombok:lombok'
