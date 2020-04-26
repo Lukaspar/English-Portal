@@ -1,0 +1,27 @@
+#######
+# LOCAL
+#######
+
+spring:
+  profiles:
+    - local
+  application:
+    name: gateway
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+---
+
+#######
+# DEV
+#######
+
+spring:
+  profiles:
+    - dev
+  application:
+    name: gateway
+  cloud:
+    config:
+      uri: http://localhost:8888

@@ -1,0 +1,12 @@
+server:
+  port: 8080
+zuul:
+  prefix: /api/v1
+  sensitive-headers: Cookie, Set-Cookie
+  routes:
+    authentication:
+      path: /users/**
+      serviceId: authenitcation
+    core:
+      path: /test/**
+      serviceId: core

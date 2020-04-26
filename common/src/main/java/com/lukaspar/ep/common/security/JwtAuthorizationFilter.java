@@ -1,6 +1,7 @@
-package com.lukaspar.ep.security;
+package com.lukaspar.ep.common.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.lukaspar.ep.security.SecurityConstants.*;
-
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
@@ -28,16 +27,16 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws IOException, ServletException {
-        String token = request.getHeader(TOKEN_HEADER);
+        String token = request.getHeader(SecurityConstants.TOKEN_HEADER);
 
-        if (StringUtils.isNotEmpty(token) && token.startsWith(TOKEN_PREFIX)) {
+        if (StringUtils.isNotEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             try {
                 final var signingKey = secretKey.getBytes();
 
                 final var parsedToken = Jwts.parserBuilder()
                         .setSigningKey(signingKey)
                         .build()
-                        .parseClaimsJws(token.replace(TOKEN_PREFIX, ""));
+                        .parseClaimsJws(token.replace(SecurityConstants.TOKEN_PREFIX, ""));
 
                 final var username = parsedToken
                         .getBody()

@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.lukaspar.ep.security.SecurityConstants.*;
+import static com.lukaspar.ep.common.security.SecurityConstants.*;
 
 @Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

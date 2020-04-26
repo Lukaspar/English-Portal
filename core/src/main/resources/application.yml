@@ -1,0 +1,16 @@
+
+######################
+## default application configuration - development purpose
+######################
+server:
+  port: 8020
+
+spring:
+  profiles: local
+  application:
+    name: core
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

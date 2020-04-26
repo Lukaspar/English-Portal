@@ -1,12 +1,9 @@
 plugins {
+	id 'maven-publish'
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
-
-group = 'com.lukaspar.ep'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -19,22 +16,23 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation "org.springframework.boot:spring-boot-starter-security"
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.1'
 	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.1'
 	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.1'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-}
 
-test {
-	useJUnitPlatform()
-}
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+}
 
 bootJar {
 	enabled = false
+}
+
+jar {
+	enabled = true
 }

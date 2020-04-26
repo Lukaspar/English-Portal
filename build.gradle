@@ -9,9 +9,12 @@ repositories {
 }
 
 dependencies {
+    compile project(":common")
     compile project(":authentication")
     compile project(":configuration")
     compile project(":discovery")
+    compile project(":core")
+    compile project(":gateway")
 }
 
 test {
