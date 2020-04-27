@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.lukaspar.ep'
+group = 'com.lukaspar.ep.authentication'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 

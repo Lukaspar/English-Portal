@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.lukaspar.ep'
+group = 'com.lukaspar.ep.core'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -16,7 +16,6 @@ configurations {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://jitpack.io' }
 }
 
 ext {
@@ -28,9 +27,13 @@ dependencies {
 	compile project(':common')
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.springframework.boot:spring-boot-starter-security"
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
 	compile 'org.springframework.cloud:spring-cloud-config-client'
 	compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'

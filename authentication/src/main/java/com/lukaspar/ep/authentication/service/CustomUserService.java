@@ -1,27 +1,36 @@
-package com.lukaspar.ep.service;
+package com.lukaspar.ep.authentication.service;
 
-import com.lukaspar.ep.exception.UserNotFoundException;
-import com.lukaspar.ep.mapper.UserMapper;
-import com.lukaspar.ep.model.User;
-import com.lukaspar.ep.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.lukaspar.ep.common.security.UserPrincipal;
+import com.lukaspar.ep.authentication.exception.UserNotFoundException;
+import com.lukaspar.ep.authentication.model.User;
+import com.lukaspar.ep.authentication.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CustomUserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) {
+    public UserPrincipal loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
-        return userMapper.userToUserPrincipal(user);
+
+        Set<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toSet());
+
+        return new UserPrincipal(
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                authorities);
     }
 }

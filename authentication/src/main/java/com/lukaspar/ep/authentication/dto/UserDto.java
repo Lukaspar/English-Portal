@@ -1,4 +1,4 @@
-package com.lukaspar.ep.dto;
+package com.lukaspar.ep.authentication.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

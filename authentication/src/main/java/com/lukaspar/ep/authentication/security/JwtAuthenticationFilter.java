@@ -1,8 +1,8 @@
-package com.lukaspar.ep.security;
+package com.lukaspar.ep.authentication.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lukaspar.ep.authentication.dto.UserDto;
 import com.lukaspar.ep.common.security.UserPrincipal;
-import com.lukaspar.ep.dto.UserDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

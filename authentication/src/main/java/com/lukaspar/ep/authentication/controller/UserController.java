@@ -1,19 +1,19 @@
-package com.lukaspar.ep.controller;
+package com.lukaspar.ep.authentication.controller;
 
-import com.lukaspar.ep.dto.UserDto;
-import com.lukaspar.ep.model.User;
+import com.lukaspar.ep.authentication.dto.UserDto;
+import com.lukaspar.ep.authentication.model.User;
+import com.lukaspar.ep.authentication.service.UserService;
 import com.lukaspar.ep.common.security.UserPrincipal;
-import com.lukaspar.ep.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("current")
-    public UserPrincipal getCurrentUser(){
-        return (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public UserPrincipal test(@AuthenticationPrincipal UserPrincipal principal){
+        return principal;
     }
 }

@@ -1,9 +1,9 @@
-package com.lukaspar.ep.controller;
+package com.lukaspar.ep.authentication.controller;
 
-import com.lukaspar.ep.dto.ApiError;
-import com.lukaspar.ep.exception.RoleNotFoundException;
-import com.lukaspar.ep.exception.UserAlreadyExistsException;
-import com.lukaspar.ep.exception.UserNotFoundException;
+import com.lukaspar.ep.authentication.exception.RoleNotFoundException;
+import com.lukaspar.ep.authentication.dto.ApiError;
+import com.lukaspar.ep.authentication.exception.UserAlreadyExistsException;
+import com.lukaspar.ep.authentication.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

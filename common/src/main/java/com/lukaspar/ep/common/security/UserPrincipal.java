@@ -1,5 +1,6 @@
 package com.lukaspar.ep.common.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +14,14 @@ public class UserPrincipal implements UserDetails {
 
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
+
+    public UserPrincipal(String username, Collection<? extends GrantedAuthority> authorities){
+        this.username = username;
+        this.authorities = authorities;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

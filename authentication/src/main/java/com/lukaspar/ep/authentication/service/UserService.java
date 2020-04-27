@@ -1,13 +1,13 @@
-package com.lukaspar.ep.service;
+package com.lukaspar.ep.authentication.service;
 
-import com.lukaspar.ep.dto.UserDto;
-import com.lukaspar.ep.exception.RoleNotFoundException;
-import com.lukaspar.ep.exception.UserAlreadyExistsException;
-import com.lukaspar.ep.mapper.UserMapper;
-import com.lukaspar.ep.model.Role;
-import com.lukaspar.ep.model.User;
-import com.lukaspar.ep.repository.RoleRepository;
-import com.lukaspar.ep.repository.UserRepository;
+import com.lukaspar.ep.authentication.dto.UserDto;
+import com.lukaspar.ep.authentication.exception.RoleNotFoundException;
+import com.lukaspar.ep.authentication.repository.RoleRepository;
+import com.lukaspar.ep.authentication.exception.UserAlreadyExistsException;
+import com.lukaspar.ep.authentication.mapper.UserMapper;
+import com.lukaspar.ep.authentication.model.Role;
+import com.lukaspar.ep.authentication.model.User;
+import com.lukaspar.ep.authentication.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

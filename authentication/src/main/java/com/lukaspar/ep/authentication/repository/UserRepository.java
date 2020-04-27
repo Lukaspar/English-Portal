@@ -1,6 +1,6 @@
-package com.lukaspar.ep.repository;
+package com.lukaspar.ep.authentication.repository;
 
-import com.lukaspar.ep.model.User;
+import com.lukaspar.ep.authentication.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

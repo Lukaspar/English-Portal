@@ -1,4 +1,4 @@
-package com.lukaspar.ep.exception;
+package com.lukaspar.ep.authentication.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

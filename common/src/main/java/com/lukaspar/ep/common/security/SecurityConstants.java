@@ -1,5 +1,8 @@
 package com.lukaspar.ep.common.security;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class SecurityConstants {
 
     public static final String AUTH_LOGIN_URL = "/users/login";
@@ -11,7 +14,4 @@ public class SecurityConstants {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final int TOKEN_EXPIRATION_TIME_MILLISECONDS = 1800000;
 
-    private SecurityConstants() {
-        throw new IllegalStateException("Cannot create instance of static util class");
-    }
 }

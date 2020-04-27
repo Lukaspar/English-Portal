@@ -1,4 +1,4 @@
-package com.lukaspar.ep.model;
+package com.lukaspar.ep.authentication.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

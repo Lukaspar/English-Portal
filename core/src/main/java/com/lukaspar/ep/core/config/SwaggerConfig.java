@@ -1,4 +1,4 @@
-package com.lukaspar.ep.authentication.config;
+package com.lukaspar.ep.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

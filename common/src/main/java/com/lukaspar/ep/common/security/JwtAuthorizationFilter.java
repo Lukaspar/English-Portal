@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.lukaspar.ep.common.security.SecurityConstants.*;
+
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
@@ -27,16 +29,16 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws IOException, ServletException {
-        String token = request.getHeader(SecurityConstants.TOKEN_HEADER);
+        String token = request.getHeader(TOKEN_HEADER);
 
-        if (StringUtils.isNotEmpty(token) && token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+        if (StringUtils.isNotEmpty(token) && token.startsWith(TOKEN_PREFIX)) {
             try {
                 final var signingKey = secretKey.getBytes();
 
                 final var parsedToken = Jwts.parserBuilder()
                         .setSigningKey(signingKey)
                         .build()
-                        .parseClaimsJws(token.replace(SecurityConstants.TOKEN_PREFIX, ""));
+                        .parseClaimsJws(token.replace(TOKEN_PREFIX, ""));
 
                 final var username = parsedToken
                         .getBody()
@@ -47,7 +49,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                         .map(authority -> new SimpleGrantedAuthority((String) authority))
                         .collect(Collectors.toList());
 
-                final var authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
+                UserPrincipal customPrincipal = new UserPrincipal(username, authorities);
+                final var authenticationToken = new UsernamePasswordAuthenticationToken(customPrincipal, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             } catch (JwtException exception) {
                 log.warn("Jwt token validation failed: {}", exception.getMessage());
