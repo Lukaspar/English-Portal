@@ -8,12 +8,6 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/dbchangelog.xml
     enabled: true
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
@@ -24,3 +18,8 @@ eureka:
       ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
