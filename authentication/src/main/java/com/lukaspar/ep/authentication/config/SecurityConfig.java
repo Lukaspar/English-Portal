@@ -1,7 +1,7 @@
 package com.lukaspar.ep.config;
 
 import com.lukaspar.ep.common.security.JwtAuthorizationFilter;
-import com.lukaspar.ep.security.JwtAuthenticationEntryPoint;
+import com.lukaspar.ep.common.security.JwtAuthenticationEntryPoint;
 import com.lukaspar.ep.security.JwtAuthenticationFilter;
 import com.lukaspar.ep.service.CustomUserService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,7 @@
 package com.lukaspar.ep.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lukaspar.ep.common.security.UserPrincipal;
 import com.lukaspar.ep.dto.UserDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

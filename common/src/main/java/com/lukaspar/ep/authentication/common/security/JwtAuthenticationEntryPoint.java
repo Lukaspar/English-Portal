@@ -1,4 +1,4 @@
-package com.lukaspar.ep.security;
+package com.lukaspar.ep.common.security;
 
 import java.io.IOException;
 
