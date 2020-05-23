@@ -1,8 +1,6 @@
 package com.lukaspar.ep.authentication.controller;
 
-import com.lukaspar.ep.authentication.dto.FriendRequest;
-import com.lukaspar.ep.authentication.dto.UserDto;
-import com.lukaspar.ep.authentication.dto.UserProfileDto;
+import com.lukaspar.ep.authentication.dto.*;
 import com.lukaspar.ep.authentication.model.User;
 import com.lukaspar.ep.authentication.service.UserService;
 import com.lukaspar.ep.common.security.UserPrincipal;
@@ -13,10 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import java.util.Set;
-
-import static com.lukaspar.ep.authentication.util.FriendshipStatus.ACCEPTED;
-import static com.lukaspar.ep.authentication.util.FriendshipStatus.REJECTED;
 import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
@@ -37,43 +31,15 @@ public class UserController {
         return principal;
     }
 
-    @GetMapping("{userId}/profile")
-    public ResponseEntity<UserProfileDto> getUserProfile(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getUserProfile(userId));
+    @GetMapping("profile")
+    public ResponseEntity<UserProfileDto> getUserProfile(@AuthenticationPrincipal UserPrincipal principal){
+        return ResponseEntity.ok(userService.getUserProfile(principal.getUsername()));
     }
 
-    @PutMapping("{userId}/profile")
-    public ResponseEntity<Void> updateUserProfile(@PathVariable Long userId, @RequestBody UserProfileDto userProfileDto){
-        userService.updateUserProfile(userId, userProfileDto);
+    @PutMapping("profile")
+    public ResponseEntity<Void> updateUserProfile(@RequestBody UserProfileDto userProfileDto, @AuthenticationPrincipal UserPrincipal principal){
+        userService.updateUserProfile(principal.getUsername(), userProfileDto);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("sendFriendRequest")
-    public ResponseEntity<Long> sendFriendRequest(@Valid @RequestBody FriendRequest friendRequest){
-        User user = userService.sendFriendRequest(friendRequest);
-        return ResponseEntity.status(CREATED).body(user.getId());
-    }
-
-    @GetMapping("{userId}/friendRequests")
-    public ResponseEntity<Set<String>> getFriendRequests(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getFriendsRequests(userId));
-    }
-
-    @PutMapping("acceptFriendRequest")
-    public ResponseEntity<Void> acceptFriendRequest(@Valid @RequestBody FriendRequest friendRequest){
-        userService.acceptOrRejectFriendRequest(friendRequest, ACCEPTED);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("rejectFriendRequest")
-    public ResponseEntity<Void> rejectFriendRequest(@Valid @RequestBody FriendRequest friendRequest){
-        userService.acceptOrRejectFriendRequest(friendRequest, REJECTED);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("{userId}/friends")
-    public ResponseEntity<Set<String>> getUserFriends(@PathVariable Long userId){
-        return ResponseEntity.ok(userService.getUserFriends(userId));
     }
 
 }

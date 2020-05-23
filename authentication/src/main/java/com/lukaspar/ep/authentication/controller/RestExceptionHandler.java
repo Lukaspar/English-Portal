@@ -40,7 +40,8 @@ public class RestExceptionHandler {
         return handle(HttpStatus.NOT_FOUND, ex);
     }
 
-    @ExceptionHandler({FriendRequestWrongStatusException.class, FriendRequestRejectedExceptionException.class})
+    @ExceptionHandler({FriendRequestWrongStatusException.class, FriendRequestRejectedExceptionException.class, MessageReceiverMustBeSenderFriendException.class,
+            MessageReceiverIdenticalLikeSenderException.class})
     protected ResponseEntity<ApiError> handleUnProcessableEntity(Exception ex, WebRequest request){
         return handle(HttpStatus.UNPROCESSABLE_ENTITY, ex);
     }

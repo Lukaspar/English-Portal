@@ -11,9 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.lukaspar.ep.authentication.util.FriendshipStatus.*;
@@ -40,6 +38,9 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages = new ArrayList<>();
 
     @OneToMany(mappedBy="owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Friendship> friends = new HashSet<>();
@@ -93,5 +94,9 @@ public class User implements Serializable {
         Set<String> result = new HashSet<>(requestedFriends);
         result.addAll(acceptedFriends);
         return result;
+    }
+
+    public void addMessage(Message message) {
+        messages.add(message);
     }
 }
