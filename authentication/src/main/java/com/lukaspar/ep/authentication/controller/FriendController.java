@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/friends")
+@RequestMapping("/authentication-module/friends")
 public class FriendController {
 
     private final FriendService friendService;

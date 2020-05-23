@@ -13,11 +13,11 @@ zuul:
   sensitive-headers: Cookie, Set-Cookie
   routes:
     authentication:
-      path: /users/**
+      path: /authentication-module/**
       serviceId: authentication
       strip-prefix: false
     core:
-      path: /test/**
+      path: /core-module/**
       serviceId: core
       strip-prefix: false
 

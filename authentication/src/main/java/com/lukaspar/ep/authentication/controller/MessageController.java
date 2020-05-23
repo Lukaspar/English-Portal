@@ -17,7 +17,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/messages")
+@RequestMapping("/authentication-module/messages")
 public class MessageController {
 
     private final MessageService messageService;

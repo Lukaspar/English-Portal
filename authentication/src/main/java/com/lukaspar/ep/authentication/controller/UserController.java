@@ -15,7 +15,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/authentication-module/users")
 public class UserController {
 
     private final UserService userService;
