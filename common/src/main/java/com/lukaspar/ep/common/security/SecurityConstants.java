@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class SecurityConstants {
 
-    public static final String AUTH_LOGIN_URL = "/users/login";
+    public static final String AUTH_LOGIN_URL = "/authentication-module/users/login";
     public static final String AUTH_LOGIN_METHOD = "POST";
 
     public static final String TOKEN_TYPE = "JWT";
