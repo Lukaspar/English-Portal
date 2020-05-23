@@ -9,6 +9,7 @@
         <sqlFile path="initial/USERS.sql" relativeToChangelogFile="true"/>
         <sqlFile path="initial/ROLE.sql" relativeToChangelogFile="true"/>
         <sqlFile path="initial/USER_ROLE.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="initial/FRIENDSHIP.sql" relativeToChangelogFile="true"/>
         <sqlFile path="data/ROLE_SCRIPT.sql" relativeToChangelogFile="true"/>
     </changeSet>
 

@@ -1,9 +1,7 @@
 package com.lukaspar.ep.authentication.controller;
 
-import com.lukaspar.ep.authentication.exception.RoleNotFoundException;
+import com.lukaspar.ep.authentication.exception.*;
 import com.lukaspar.ep.authentication.dto.ApiError;
-import com.lukaspar.ep.authentication.exception.UserAlreadyExistsException;
-import com.lukaspar.ep.authentication.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,14 +30,19 @@ public class RestExceptionHandler {
         return handle(HttpStatus.BAD_REQUEST, ex);
     }
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    protected ResponseEntity<ApiError> handleUserAlreadyExistsException(Exception ex, WebRequest request){
+    @ExceptionHandler({UserAlreadyExistsException.class, FriendRequestAlreadyExistsException.class})
+    protected ResponseEntity<ApiError> handleAlreadyExistsException(Exception ex, WebRequest request){
         return handle(HttpStatus.CONFLICT, ex);
     }
 
-    @ExceptionHandler({ RoleNotFoundException.class, UserNotFoundException.class })
-    protected ResponseEntity<ApiError> handleRoleNotFoundException(Exception ex, WebRequest request){
+    @ExceptionHandler({RoleNotFoundException.class, UserNotFoundException.class, FriendRequestNotFoundException.class})
+    protected ResponseEntity<ApiError> handleNotFoundException(Exception ex, WebRequest request){
         return handle(HttpStatus.NOT_FOUND, ex);
+    }
+
+    @ExceptionHandler({FriendRequestWrongStatusException.class, FriendRequestRejectedExceptionException.class})
+    protected ResponseEntity<ApiError> handleUnProcessableEntity(Exception ex, WebRequest request){
+        return handle(HttpStatus.UNPROCESSABLE_ENTITY, ex);
     }
 
     private ResponseEntity<ApiError> handle(HttpStatus status, Exception ex) {
