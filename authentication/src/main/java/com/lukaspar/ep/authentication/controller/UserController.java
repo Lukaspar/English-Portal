@@ -2,6 +2,7 @@ package com.lukaspar.ep.authentication.controller;
 
 import com.lukaspar.ep.authentication.dto.FriendRequest;
 import com.lukaspar.ep.authentication.dto.UserDto;
+import com.lukaspar.ep.authentication.dto.UserProfileDto;
 import com.lukaspar.ep.authentication.model.User;
 import com.lukaspar.ep.authentication.service.UserService;
 import com.lukaspar.ep.common.security.UserPrincipal;
@@ -34,6 +35,17 @@ public class UserController {
     @GetMapping("current")
     public UserPrincipal currentUser(@AuthenticationPrincipal UserPrincipal principal){
         return principal;
+    }
+
+    @GetMapping("{userId}/profile")
+    public ResponseEntity<UserProfileDto> getUserProfile(@PathVariable Long userId){
+        return ResponseEntity.ok(userService.getUserProfile(userId));
+    }
+
+    @PutMapping("{userId}/profile")
+    public ResponseEntity<Void> updateUserProfile(@PathVariable Long userId, @RequestBody UserProfileDto userProfileDto){
+        userService.updateUserProfile(userId, userProfileDto);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("sendFriendRequest")

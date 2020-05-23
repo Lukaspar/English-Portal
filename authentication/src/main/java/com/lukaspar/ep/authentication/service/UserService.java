@@ -2,6 +2,7 @@ package com.lukaspar.ep.authentication.service;
 
 import com.lukaspar.ep.authentication.dto.FriendRequest;
 import com.lukaspar.ep.authentication.dto.UserDto;
+import com.lukaspar.ep.authentication.dto.UserProfileDto;
 import com.lukaspar.ep.authentication.exception.RoleNotFoundException;
 import com.lukaspar.ep.authentication.exception.UserNotFoundException;
 import com.lukaspar.ep.authentication.repository.RoleRepository;
@@ -47,6 +48,19 @@ public class UserService {
         return roleRepository.findByName(DEFAULT_ROLE).orElseThrow(() -> new RoleNotFoundException(DEFAULT_ROLE));
     }
 
+    public UserProfileDto getUserProfile(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return userMapper.userToUserProfileDto(user);
+    }
+
+    @Transactional
+    public void updateUserProfile(Long userId, UserProfileDto userProfileDto) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        userMapper.updateUserFromUserProfileDto(userProfileDto, user);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Transactional
     public User sendFriendRequest(FriendRequest friendRequest) {
         User owner = userRepository.findById(friendRequest.getOwnerId()).orElseThrow(() -> new UserNotFoundException(friendRequest.getOwnerId()));
         User friend = userRepository.findById(friendRequest.getFriendId()).orElseThrow(() -> new UserNotFoundException(friendRequest.getFriendId()));
@@ -59,6 +73,7 @@ public class UserService {
         return owner.getFriendsRequests();
     }
 
+    @Transactional
     public void acceptOrRejectFriendRequest(FriendRequest friendRequest, FriendshipStatus status) {
         User owner = userRepository.findById(friendRequest.getOwnerId()).orElseThrow(() -> new UserNotFoundException(friendRequest.getOwnerId()));
         User friend = userRepository.findById(friendRequest.getFriendId()).orElseThrow(() -> new UserNotFoundException(friendRequest.getFriendId()));

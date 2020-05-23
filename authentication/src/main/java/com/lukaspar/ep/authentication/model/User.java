@@ -30,9 +30,11 @@ public class User implements Serializable {
     private Long id;
 
     private String username;
-
     private String password;
-
+    private String name;
+    private String surname;
+    private Long age;
+    private String country;
     private boolean active;
 
     @ManyToMany(fetch = FetchType.EAGER)
