@@ -1,7 +1,7 @@
 package com.lukaspar.ep.core.controller;
 
 import com.lukaspar.ep.core.dto.ApiError;
-import com.lukaspar.ep.core.exception.EnglishDictionaryAlreadyExists;
+import com.lukaspar.ep.core.exception.EnglishDictionaryAlreadyExistsException;
 import com.lukaspar.ep.core.exception.EnglishDictionaryIsEmptyException;
 import com.lukaspar.ep.core.exception.EnglishDictionaryNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class RestExceptionHandler {
         return handle(HttpStatus.UNPROCESSABLE_ENTITY, ex);
     }
 
-    @ExceptionHandler(EnglishDictionaryAlreadyExists.class)
+    @ExceptionHandler(EnglishDictionaryAlreadyExistsException.class)
     protected ResponseEntity<ApiError> handleConflictException(Exception ex, WebRequest request){
         return handle(HttpStatus.CONFLICT, ex);
     }

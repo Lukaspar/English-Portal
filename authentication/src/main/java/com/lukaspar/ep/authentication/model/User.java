@@ -2,7 +2,7 @@ package com.lukaspar.ep.authentication.model;
 
 import com.lukaspar.ep.authentication.exception.FriendRequestAlreadyExistsException;
 import com.lukaspar.ep.authentication.exception.FriendRequestNotFoundException;
-import com.lukaspar.ep.authentication.exception.FriendRequestRejectedExceptionException;
+import com.lukaspar.ep.authentication.exception.FriendRequestRejectedException;
 import com.lukaspar.ep.authentication.exception.FriendRequestWrongStatusException;
 import com.lukaspar.ep.authentication.util.FriendshipStatus;
 import lombok.Getter;
@@ -58,7 +58,7 @@ public class User implements Serializable {
         } else if (existingFriendship.get().getStatus() == REQUESTED){
             throw new FriendRequestAlreadyExistsException(id, friend.getId());
         } else if(existingFriendship.get().getStatus() == REJECTED){
-            throw new FriendRequestRejectedExceptionException(id, friend.getId());
+            throw new FriendRequestRejectedException(id, friend.getId());
         }
     }
 

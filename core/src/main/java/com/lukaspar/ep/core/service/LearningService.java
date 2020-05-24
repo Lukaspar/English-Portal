@@ -2,7 +2,7 @@ package com.lukaspar.ep.core.service;
 
 import com.lukaspar.ep.core.dto.InputEnglishWordDto;
 import com.lukaspar.ep.core.dto.TranslateWordResponseDto;
-import com.lukaspar.ep.core.exception.EnglishDictionaryAlreadyExists;
+import com.lukaspar.ep.core.exception.EnglishDictionaryAlreadyExistsException;
 import com.lukaspar.ep.core.exception.EnglishDictionaryIsEmptyException;
 import com.lukaspar.ep.core.exception.EnglishDictionaryNotFoundException;
 import com.lukaspar.ep.core.mapper.EnglishDictionaryMapper;
@@ -56,7 +56,7 @@ public class LearningService {
     @Transactional
     public EnglishDictionary addEnglishWord(InputEnglishWordDto request) {
         if (englishDictionaryRepository.existsByEnglishWord(request.getEnglishWord())) {
-            throw new EnglishDictionaryAlreadyExists(request.getEnglishWord());
+            throw new EnglishDictionaryAlreadyExistsException(request.getEnglishWord());
         }
         EnglishDictionary englishDictionary = englishDictionaryMapper.inputEnglishWordDtoToEnglishDictionary(request);
         return englishDictionaryRepository.saveAndFlush(englishDictionary);
