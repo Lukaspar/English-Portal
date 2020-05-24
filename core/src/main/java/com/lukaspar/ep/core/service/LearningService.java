@@ -9,6 +9,8 @@ import com.lukaspar.ep.core.mapper.EnglishDictionaryMapper;
 import com.lukaspar.ep.core.model.EnglishDictionary;
 import com.lukaspar.ep.core.repository.EnglishDictionaryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -69,4 +71,7 @@ public class LearningService {
         englishDictionaryRepository.delete(englishDictionary);
     }
 
+    public Page<EnglishDictionary> englishDictionary(Pageable pageable) {
+        return englishDictionaryRepository.findAll(pageable);
+    }
 }

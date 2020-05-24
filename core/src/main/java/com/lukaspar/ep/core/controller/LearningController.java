@@ -5,6 +5,8 @@ import com.lukaspar.ep.core.dto.TranslateWordResponseDto;
 import com.lukaspar.ep.core.model.EnglishDictionary;
 import com.lukaspar.ep.core.service.LearningService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,11 +31,15 @@ public class LearningController {
         return ResponseEntity.ok(learningService.translateEnglishWord(inputEnglishWordDto));
     }
 
+    @GetMapping("english-dictionary")
+    public Page<EnglishDictionary> englishDictionary(Pageable pageable){
+        return learningService.englishDictionary(pageable);
+    }
+
     @PostMapping("admin/add-english-word")
     public ResponseEntity<Long> addEnglishWord(@Valid @RequestBody InputEnglishWordDto inputEnglishWordDto){
         EnglishDictionary englishDictionary = learningService.addEnglishWord(inputEnglishWordDto);
         return ResponseEntity.status(CREATED).body(englishDictionary.getId());
-
     }
 
     @DeleteMapping("admin/delete-english-word")
@@ -41,5 +47,4 @@ public class LearningController {
         learningService.deleteEnglishWord(inputEnglishWordDto);
         return ResponseEntity.noContent().build();
     }
-
 }
