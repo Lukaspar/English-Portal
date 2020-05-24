@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS message (
-    id int8 NOT NULL,
+    id serial NOT NULL,
     title varchar(20) NOT NULL,
     text varchar(500) NOT NULL,
     message_time timestamp,

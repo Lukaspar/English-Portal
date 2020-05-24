@@ -22,13 +22,13 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @PostMapping("sendMessage")
+    @PostMapping("send-message")
     public ResponseEntity<Long> sendMessage(@Valid @RequestBody SendMessageDto sendMessageDto, @AuthenticationPrincipal UserPrincipal principal){
         Message message = messageService.sendMessage(sendMessageDto, principal.getUsername());
         return ResponseEntity.status(CREATED).body(message.getId());
     }
 
-    @GetMapping("retrieveMessages")
+    @GetMapping("retrieve-messages")
     public ResponseEntity<List<ReceiveMessageDto>> retrieveMessages(@AuthenticationPrincipal UserPrincipal principal){
         return ResponseEntity.ok(messageService.retrieveMessages(principal.getUsername()));
     }
